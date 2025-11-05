@@ -8,4 +8,3 @@ and after this
 (console) conda activate distributed
 Note: If you are using Windows use this command after the two before
 (console) conda init powershell
-

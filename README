@@ -1,10 +1,1 @@
-First of all, this project needs Miniforge to be executed
-You can download it from his repository
-https://github.com/conda-forge/miniforge
-
-Then you can create the Conda Environment using
-(console) conda env create -f environment_base.yml
-and after this
-(console) conda activate distributed
-Note: If you are using Windows use this command after the two before
-(console) conda init powershell
+All the system is running over Python 3.10.11

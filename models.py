@@ -313,8 +313,62 @@ class Convolutional_ImageNet(nn.Module):
 
             nn.AdaptiveAvgPool2d((7, 7))
         )
+        
+        self.classifier = nn.Sequential(
+            nn.Flatten(),
+            nn.Linear(512 * 7 * 7, 4096),
+            nn.ReLU(inplace=True),
+            nn.Dropout(0.1), 
+            nn.Linear(4096, 1024), 
+            nn.ReLU(), 
+            nn.Dropout(0.1), 
+            nn.Linear(1024, 512), 
+            nn.ReLU(), 
+            nn.Dropout(0.1), 
+            nn.Linear(512, num_classes)
+        )
 
-        # 🔥 Solo ajusto la PRIMERA capa del clasificador
+    def forward(self, x):
+        x = self.features(x)
+        x = self.classifier(x)
+        return x
+    
+#Food101 Model
+class Convolutional_Food101(nn.Module):
+    def __init__(self, num_classes=101):
+        super().__init__()
+
+        self.features = nn.Sequential(
+            nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=3, stride=2, padding=1),
+
+            nn.Conv2d(64, 128, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(128, 128, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+
+            nn.Conv2d(128, 256, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(256, 256, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+
+            nn.Conv2d(256, 512, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(512, 512, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.MaxPool2d(kernel_size=2, stride=2),
+
+            nn.Conv2d(512, 512, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(512, 512, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+
+            nn.AdaptiveAvgPool2d((7, 7))
+        )
+        
         self.classifier = nn.Sequential(
             nn.Flatten(),
             nn.Linear(512 * 7 * 7, 4096),

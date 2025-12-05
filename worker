@@ -11,7 +11,7 @@
     command: python main.py --role worker --id 1 --host parameter_server --port 5000
     stdin_open: true
     tty: true
-    shm_size: '4gb'
+    shm_size: '2gb'
 
     worker2:
       build: .
@@ -26,7 +26,7 @@
       command: python main.py --role worker --id 2 --host parameter_server --port 5000
       stdin_open: true
       tty: true
-      shm_size: '4gb'
+      shm_size: '2gb'
 
     worker3:
       build: .

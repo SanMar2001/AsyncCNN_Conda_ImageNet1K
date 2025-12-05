@@ -3,7 +3,7 @@ import time
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import argparse
-from models import Convolutional_ImageNet, Worker, ParameterServer
+from models import Convolutional_Food101, Worker, ParameterServer
 import torch
 
 def main(args):
@@ -75,9 +75,9 @@ if __name__ == "__main__":
     print("Dataset downloaded or already founded")
     longitude = len(train_dataset)
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    model = Convolutional_ImageNet(num_classes=101)
+    model = Convolutional_Food101(num_classes=101)
     model.to(device)
-    parser.set_defaults(model=model, classmodel=Convolutional_ImageNet,
+    parser.set_defaults(model=model, classmodel=Convolutional_Food101,
                         dataset=train_dataset, longitude=longitude)
     
     args = parser.parse_args()
